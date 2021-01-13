@@ -1,5 +1,3 @@
-# Minichat
-
 For those who are accustomed to the terminal interface, **minichat** has a certain effect. The message is transmitted through the established udp connection, and then the message encryption module will be added. Need to be used with the support of intranet penetration.
 
 ## Obtain
