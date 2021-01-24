@@ -33,19 +33,30 @@ type Handler struct {
 }
 ```
 
-### Startup parameters
+### Configuration file
 
-As indicated by the above structure, there are two parameters should be set. The first two parameters are must have.
+Manage software settings information with configuration files in the root directory.
 
-- `h`
+```yaml
+address:
+  # Relevant configuration of network connection address.
+  local: 127.0.0.1:10000
+  remote: 127.0.0.1:11000
+
+crypto:
+  # AES encryption related configuration.
+  key: '8SMEE7ieNjSWVFqq'
+```
+
+- `local`
 
 Set the host address and listening port, the default is `127.0.0.1:10000`.
 
-- `t`
+- `remote`
 
 Set the target address and listening port, the default is `127.0.0.1:11000`.
 
-- `k`
+- `key`
 
 Set the key for encryption the data, the default is `8SMEE7ieNjSWVFqq`, and **key's length must be `128bit`, `192bit` or `256bit`**.
 
