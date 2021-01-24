@@ -1,0 +1,8 @@
+address:
+  # Relevant configuration of network connection address.
+  local: 127.0.0.1:10000
+  remote: 127.0.0.1:11000
+
+crypto:
+  # AES encryption related configuration.
+  key: '8SMEE7ieNjSWVFqq'
