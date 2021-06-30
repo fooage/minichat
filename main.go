@@ -17,12 +17,11 @@ func main() {
 	if conf == nil {
 		return
 	}
-	// Create handler and let it start work.
 	handler := handle.NewHandler()
 	handler.LocalAddr = conf.Local
 	handler.RemoteAddr = conf.Remote
 	handler.AesKey = []byte(conf.Key)
-	// Show the console interface.
+	// show the console interface
 	cui, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		fmt.Println(err)

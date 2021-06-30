@@ -37,7 +37,7 @@ func inputView(g *gocui.Gui, x0, y0, x1, y1 int) error {
 		v.Editable = true
 		v.Overwrite = false
 		v.Title = "Talk"
-		// Set the input window to focus.
+		// set the input window to focus
 		if _, err := g.SetCurrentView("input"); err != nil {
 			return err
 		}
@@ -72,24 +72,20 @@ func send(g *gocui.Gui, v *gocui.View) error {
 }
 
 func recv(g *gocui.Gui) {
-	// Start goroutine to listen for messages.
 	go handler.Recv()
 	msg := make([]byte, 1024)
-	for {
-		select {
-		case msg = <-handler.Buf:
-			// This function is very important. In order to make the operation
-			// thread safe, need to write the operation into Update function.
-			g.Update(func(g *gocui.Gui) error {
-				v, err := g.View("output")
-				if err != nil {
-					fmt.Println(err)
-					return err
-				}
-				v.Write(msg)
-				return nil
-			})
-		}
+	for msg = range handler.Buf {
+		// This function is very important. In order to make the operation
+		// thread safe, need to write the operation into Update function.
+		g.Update(func(g *gocui.Gui) error {
+			v, err := g.View("output")
+			if err != nil {
+				fmt.Println(err)
+				return err
+			}
+			v.Write(msg)
+			return nil
+		})
 	}
 }
 

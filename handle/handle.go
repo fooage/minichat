@@ -9,11 +9,11 @@ import (
 // Handler is a structure that accepts and sends messages and is connected to
 // the user interface through the channel.
 type Handler struct {
-	// The message receive channel.
+	// message receive channel
 	Buf chan []byte
-	// Key for AES encryption.
+	// key for AES encryption
 	AesKey []byte
-	// Which is client's listen address and connection with the other client.
+	// listen address and remote address
 	LocalAddr  string
 	RemoteAddr string
 }
@@ -40,7 +40,7 @@ func (h *Handler) Recv() {
 		return
 	}
 	defer conn.Close()
-	// Start listening for messages and receive.
+	// listening for messages and receive
 	for {
 		data := make([]byte, 1024)
 		_, _, err := conn.ReadFromUDP(data)
