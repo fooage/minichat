@@ -23,6 +23,7 @@ func LoadConfig(path string) *Config {
 		fmt.Println(err)
 		return nil
 	}
+
 	return &Config{
 		Local:  viper.GetString("address.local"),
 		Remote: viper.GetString("address.remote"),

@@ -21,12 +21,14 @@ func main() {
 	handler.LocalAddr = conf.Local
 	handler.RemoteAddr = conf.Remote
 	handler.AesKey = []byte(conf.Key)
+
 	// show the console interface
 	cui, err := gocui.NewGui(gocui.OutputNormal)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
+
 	console.SetHandler(handler)
 	console.RunInterface(cui)
 }

@@ -73,6 +73,7 @@ func send(g *gocui.Gui, v *gocui.View) error {
 
 func recv(g *gocui.Gui) {
 	go handler.Recv()
+
 	msg := make([]byte, 1024)
 	for msg = range handler.Buf {
 		// This function is very important. In order to make the operation
@@ -99,6 +100,7 @@ func RunInterface(g *gocui.Gui) {
 	defer func() {
 		g.Close()
 	}()
+
 	g.SetManagerFunc(layout)
 	if err := g.SetKeybinding("input", gocui.KeyCtrlC, gocui.ModNone, quit); err != nil {
 		fmt.Println(err)
@@ -108,6 +110,7 @@ func RunInterface(g *gocui.Gui) {
 		fmt.Println(err)
 		return
 	}
+
 	// Start to read the channel and refresh the interface.
 	go recv(g)
 	if err := g.MainLoop(); err != nil {

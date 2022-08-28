@@ -11,8 +11,10 @@ import (
 type Handler struct {
 	// message receive channel
 	Buf chan []byte
+
 	// key for AES encryption
 	AesKey []byte
+
 	// listen address and remote address
 	LocalAddr  string
 	RemoteAddr string
@@ -40,6 +42,7 @@ func (h *Handler) Recv() {
 		return
 	}
 	defer conn.Close()
+
 	// listening for messages and receive
 	for {
 		data := make([]byte, 1024)
@@ -60,12 +63,14 @@ func (h *Handler) Send(orig []byte) {
 		fmt.Println(err)
 		return
 	}
+
 	conn, err := net.DialUDP("udp", nil, remoteAddr)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 	defer conn.Close()
+
 	ip := []byte("[" + strings.Split(h.LocalAddr, ":")[0] + "]" + ":")
 	orig = append(ip, orig...)
 	data := encrypt(orig, h.AesKey)
